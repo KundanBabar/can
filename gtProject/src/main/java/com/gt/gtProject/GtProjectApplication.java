@@ -8,6 +8,6 @@ public class GtProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GtProjectApplication.class, args);
-	}
+	} 
 
 }
