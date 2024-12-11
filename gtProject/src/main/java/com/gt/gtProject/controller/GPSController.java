@@ -16,6 +16,7 @@ public class GPSController {
 
     @GetMapping("/data") 
     public GPSResponse getGPSData() {
+        System.out.println("Kundan");
         return new GPSResponse(gpsDeviceService.getLatitude(), gpsDeviceService.getLongitude());
     }
 }
