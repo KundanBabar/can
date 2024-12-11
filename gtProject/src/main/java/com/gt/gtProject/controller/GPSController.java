@@ -26,6 +26,7 @@ public class GPSController {
 
     @GetMapping("/data") 
     public GPSResponse getGPSData() {
+	System.out.println("kundan");
     	try (ServerSocket serverSocket = new ServerSocket(8080)) {
             System.out.println("Listening for GPS device on port 8080...");
             
