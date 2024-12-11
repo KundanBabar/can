@@ -17,7 +17,7 @@ import com.gt.gtProject.service.GpsDeviceService;
 @RequestMapping("/api/gps")
 public class GPSController {
 	
-	private volatile double latitude = 0.0;
+    private volatile double latitude = 0.0;
     private volatile double longitude = 0.0;
 
 
@@ -34,53 +34,12 @@ public class GPSController {
                 System.out.println("GPS Device Connected.");
 
                 // Handle incoming GPS messages
-                handleGPSData(clientSocket);
+                //handleGPSData(clientSocket);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new GPSResponse(gpsDeviceService.getLatitude(), gpsDeviceService.getLongitude());
-    }
-    
-    private void handleGPSData(Socket clientSocket) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                parseGPSData(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void parseGPSData(String gpsData) {
-        // Simulate parsing logic here (parse NMEA strings to extract GPS coordinates)
-        System.out.println("Received GPS Data: " + gpsData);
-
-        if (gpsData.contains("$GPRMC")) {
-            String[] parts = gpsData.split(",");
-            try {
-                String latString = parts[3];
-                String latDirection = parts[4];
-                String lonString = parts[5];
-                String lonDirection = parts[6];
-
-                latitude = parseCoordinate(latString, latDirection);
-                longitude = parseCoordinate(lonString, lonDirection);
-
-                System.out.println("Parsed Latitude: " + latitude + " Longitude: " + longitude);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    private double parseCoordinate(String value, String direction) {
-        double coord = Double.parseDouble(value);
-        if (direction.equals("S") || direction.equals("W")) {
-            coord = -coord;
-        }
-        return coord;
     }
 }
 
