@@ -26,20 +26,6 @@ public class GPSController {
 
     @GetMapping("/data") 
     public GPSResponse getGPSData() {
-	System.out.println("kundan");
-    	try (ServerSocket serverSocket = new ServerSocket(8080)) {
-            System.out.println("Listening for GPS device on port 8080...");
-            
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("GPS Device Connected.");
-
-                // Handle incoming GPS messages
-                //handleGPSData(clientSocket);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return new GPSResponse(gpsDeviceService.getLatitude(), gpsDeviceService.getLongitude());
     }
 }
