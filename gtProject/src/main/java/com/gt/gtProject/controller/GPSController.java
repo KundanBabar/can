@@ -26,6 +26,7 @@ public class GPSController {
 
     @GetMapping("/data") 
     public GPSResponse getGPSData() {
+	System.out.println("Kb");
         return new GPSResponse(gpsDeviceService.getLatitude(), gpsDeviceService.getLongitude());
     }
 }
